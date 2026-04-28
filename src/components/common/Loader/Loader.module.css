@@ -1,0 +1,92 @@
+.loaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loaderWrapper.fullScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.loaderWrapper.dark {
+  background: #06080f;
+}
+
+.loaderWrapper.light {
+  background: #06080f;
+}
+
+.loaderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.textContainer {
+  position: relative;
+  user-select: none;
+}
+
+.outlineText,
+.fillText {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.outlineText {
+  -webkit-text-stroke: 2px rgba(168, 85, 247, 0.3);
+  color: transparent;
+}
+
+.dark .outlineText {
+  -webkit-text-stroke-color: rgba(168, 85, 247, 0.3);
+}
+
+.light .outlineText {
+  -webkit-text-stroke-color: rgba(168, 85, 247, 0.3);
+}
+
+.fillText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #a855f7, #00d4ff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+}
+
+.progressBar {
+  width: 200px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #a855f7, #00d4ff);
+  transform-origin: left;
+}
+
+@media (max-width: 768px) {
+  .outlineText,
+  .fillText {
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .progressBar {
+    width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .outlineText,
+  .fillText {
+    font-size: 1.8rem;
+  }
+}

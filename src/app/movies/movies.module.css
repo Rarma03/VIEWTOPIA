@@ -1,0 +1,95 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 0;
+}
+
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, #e8edf5 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1rem;
+}
+
+.dark .subtitle,
+.light .subtitle { color: rgba(232, 237, 245, 0.45); }
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 0.5rem 1.2rem;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.dark .tab {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(232, 237, 245, 0.5);
+}
+
+.light .tab {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(232, 237, 245, 0.5);
+}
+
+.tab:hover { opacity: 0.8; }
+
+.tabActive {
+  background: linear-gradient(135deg, #e50914, #a855f7) !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+}
+
+.loadingText, .errorText {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1rem;
+}
+
+.dark .loadingText,
+.light .loadingText { color: rgba(232, 237, 245, 0.4); }
+
+.dark .errorText { color: #ef4444; }
+.light .errorText { color: #dc2626; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,141 @@
+/* ──────────────────────────────────────────────────────────────
+   Viewtopia — anime-title logo
+   Pure CSS effects on top of the Bungee display font.
+   ────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-size, 38px) * 0.22);
+  line-height: 1;
+  flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wrapper:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* ── Diamond play mark ── */
+.mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(255, 61, 113, 0.4));
+  transition: filter 0.3s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wrapper:hover .mark {
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7))
+          drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.markGlow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35), transparent 70%);
+  z-index: -1;
+  animation: pulseGlow 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.15); }
+}
+
+/* ── Wordmark ── */
+.wordmark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-family: var(--font-display, 'Bungee'), 'Impact', system-ui, sans-serif;
+  font-size: var(--logo-font, 22px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: none;
+}
+
+/*
+ * The word itself — uses a clipped gradient fill, then `data-text` attribute
+ * is duplicated via ::before for an offset shadow layer, giving the classic
+ * anime-title "shifted color" pop.
+ */
+.word {
+  position: relative;
+  color: transparent;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #ffd700 60%, #ff3d71 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1.2px #a855f7;
+  display: inline-block;
+  transform: skewX(-6deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s;
+  filter:
+    drop-shadow(0 0 1px rgba(168, 85, 247, 0.9))
+    drop-shadow(2px 2px 0 rgba(10, 5, 15, 0.95))
+    drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
+}
+
+.wrapper:hover .word {
+  transform: skewX(-6deg) translateX(2px);
+  filter:
+    drop-shadow(0 0 1px rgba(255, 61, 113, 0.95))
+    drop-shadow(3px 3px 0 rgba(10, 5, 15, 1))
+    drop-shadow(0 0 22px rgba(255, 61, 113, 0.65))
+    drop-shadow(0 0 32px rgba(0, 212, 255, 0.4));
+}
+
+/* Underlay — a flat dark "sticker" silhouette for extra depth on dark bg */
+.word::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-stroke: 0;
+  color: rgba(10, 5, 15, 0.95);
+  z-index: -1;
+  transform: translate(2px, 2px);
+  -webkit-text-fill-color: rgba(10, 5, 15, 0.95);
+}
+
+/* Sparkle accent */
+.sparkle {
+  display: inline-block;
+  font-family: 'Segoe UI Symbol', system-ui, sans-serif;
+  font-size: 0.7em;
+  color: #ffd700;
+  text-shadow:
+    0 0 8px rgba(255, 215, 0, 0.8),
+    0 0 16px rgba(255, 215, 0, 0.4);
+  transform: translateY(-0.4em);
+  animation: sparkleSpin 4s linear infinite,
+             sparklePop 2s ease-in-out infinite;
+}
+
+@keyframes sparkleSpin {
+  from { transform: translateY(-0.4em) rotate(0deg); }
+  to   { transform: translateY(-0.4em) rotate(360deg); }
+}
+
+@keyframes sparklePop {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+/* Responsive shrink for very small screens */
+@media (max-width: 480px) {
+  .wrapper { gap: calc(var(--logo-size, 38px) * 0.18); }
+}

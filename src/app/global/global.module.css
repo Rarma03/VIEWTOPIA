@@ -1,0 +1,285 @@
+.page { min-height: 100vh; padding: 100px 20px 60px; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* Header */
+.header { text-align: center; margin-bottom: 1.5rem; }
+.headerIcon { color: #a855f7; margin-bottom: 0.5rem; }
+.title {
+  font-size: 2rem; font-weight: 800;
+  background: linear-gradient(135deg, #a855f7, #06b6d4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.subtitle { color: rgba(232, 237, 245, 0.45); font-size: 0.95rem; margin-top: 0.3rem; }
+
+/* Tab Bar */
+.tabBar {
+  display: flex; gap: 4px; padding: 4px;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px; margin-bottom: 1.5rem;
+}
+.tabBtn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.7rem 1rem; border: none; border-radius: 10px;
+  background: transparent; color: rgba(232, 237, 245, 0.5);
+  font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.tabBtn:hover { color: #e8edf5; background: rgba(255, 255, 255, 0.04); }
+.tabActive {
+  background: rgba(168, 85, 247, 0.12) !important; color: #a855f7 !important;
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.1);
+}
+
+/* ─── Sub-Tabs (Leaderboard categories) ─── */
+.subTabs { display: flex; gap: 6px; margin-bottom: 1.5rem; }
+.subTab {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1rem; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+  background: transparent; color: rgba(232, 237, 245, 0.5);
+  font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.subTab:hover { border-color: rgba(168, 85, 247, 0.3); color: #e8edf5; }
+.subTabActive { border-color: #a855f7; color: #a855f7; background: rgba(168, 85, 247, 0.08); }
+
+/* ─── Time Filter ─── */
+.timeFilter {
+  display: flex; gap: 0.35rem; padding: 3px;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px; margin-bottom: 1rem;
+}
+.timeBtn {
+  flex: 1; padding: 0.45rem 0.75rem; border: none; border-radius: 8px;
+  background: transparent; color: rgba(232, 237, 245, 0.45);
+  font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.timeBtn:hover { color: #e8edf5; }
+.timeBtnActive { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+.periodPicker {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin-bottom: 1.25rem;
+}
+.periodArrow {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px; background: rgba(255, 255, 255, 0.03);
+  color: rgba(232, 237, 245, 0.6); cursor: pointer; transition: all 0.2s;
+}
+.periodArrow:hover:not(:disabled) { background: rgba(168, 85, 247, 0.12); color: #a855f7; border-color: rgba(168, 85, 247, 0.25); }
+.periodArrow:disabled { opacity: 0.25; cursor: default; }
+.periodLabel { font-size: 0.95rem; font-weight: 700; color: #e8edf5; min-width: 150px; text-align: center; }
+
+/* ─── Leaderboard ─── */
+.leaderList { display: flex; flex-direction: column; gap: 0.5rem; }
+.leaderRow {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.7rem 1rem; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s;
+}
+.leaderRow:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(168, 85, 247, 0.15); }
+.leaderRank { width: 32px; text-align: center; flex-shrink: 0; }
+.rankNum { font-size: 0.9rem; font-weight: 700; color: rgba(232, 237, 245, 0.3); }
+.leaderUser {
+  display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #e8edf5;
+  min-width: 180px; flex-shrink: 0;
+}
+.leaderAvatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800; color: #fff;
+  border: 2px solid transparent; flex-shrink: 0;
+}
+.leaderNameBlock { display: flex; flex-direction: column; }
+.leaderName { font-size: 0.9rem; font-weight: 700; }
+.leaderUsername { font-size: 0.72rem; color: rgba(232, 237, 245, 0.35); }
+.leaderBarArea { flex: 1; display: flex; align-items: center; gap: 0.75rem; }
+.leaderBarTrack { flex: 1; height: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; }
+.leaderBarFill { height: 100%; border-radius: 4px; background: #a855f7; transition: width 0.6s; }
+.leaderValue { font-size: 0.85rem; font-weight: 700; color: #e8edf5; white-space: nowrap; min-width: 60px; text-align: right; }
+
+/* ─── Badges ─── */
+.badgeStats {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 12px 16px; background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.badgeStat { font-size: 0.85rem; color: rgba(232, 237, 245, 0.5); }
+.badgeStat strong { color: #e8edf5; font-weight: 700; }
+.badgeStatDivider { width: 1px; height: 20px; background: rgba(255, 255, 255, 0.08); }
+.badgeProgressWrap { flex: 1; display: flex; align-items: center; gap: 8px; }
+.badgeProgressBg { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 3px; overflow: hidden; }
+.badgeProgressFill { height: 100%; background: linear-gradient(90deg, #a855f7, #ffd700); border-radius: 3px; transition: width 0.6s; }
+.badgeProgressText { font-size: 0.8rem; font-weight: 600; color: #ffd700; white-space: nowrap; }
+
+.badgeFilters { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
+.badgeFilterRow { display: flex; flex-wrap: wrap; gap: 5px; }
+.filterPill {
+  padding: 4px 12px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;
+  background: transparent; color: rgba(232, 237, 245, 0.5);
+  font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+}
+.filterPill:hover { border-color: rgba(168, 85, 247, 0.3); color: #e8edf5; }
+.filterPillActive { border-color: #a855f7; color: #a855f7; background: rgba(168, 85, 247, 0.08); }
+
+.badgeGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.badgeCard {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px; border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s;
+}
+.badgeUnlocked { background: rgba(255, 255, 255, 0.04); }
+.badgeUnlocked:hover { border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 4px 16px rgba(168, 85, 247, 0.08); }
+.badgeLocked { background: rgba(255, 255, 255, 0.02); opacity: 0.6; }
+.badgeLocked:hover { opacity: 0.8; }
+.badgeIconWrap {
+  flex-shrink: 0; width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px; border: 1.5px solid;
+}
+.badgeInfo { flex: 1; min-width: 0; }
+.badgeName { font-size: 0.88rem; font-weight: 700; color: #e8edf5; margin-bottom: 1px; }
+.badgeDesc { font-size: 0.75rem; color: rgba(232, 237, 245, 0.45); margin-bottom: 5px; line-height: 1.3; }
+.badgeTags { display: flex; align-items: center; gap: 6px; }
+.diffTag {
+  font-size: 0.6rem; font-weight: 600; padding: 1px 6px;
+  border-radius: 4px; border: 1px solid; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.catTag { font-size: 0.65rem; font-weight: 500; }
+.badgeProgressCol { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; min-width: 60px; }
+.badgeProgressBarSmall { width: 50px; height: 3px; background: rgba(255, 255, 255, 0.06); border-radius: 2px; overflow: hidden; }
+.badgeProgressFillSmall { height: 100%; border-radius: 2px; transition: width 0.6s; }
+.badgeProgressLabel { font-size: 0.65rem; font-weight: 600; color: rgba(232, 237, 245, 0.35); }
+
+/* ─── Users ─── */
+.usersSearch {
+  position: relative; margin-bottom: 1.25rem;
+}
+.searchIcon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: rgba(232, 237, 245, 0.3);
+}
+.searchInput {
+  width: 100%; padding: 0.7rem 1rem 0.7rem 2.8rem;
+  background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px; color: #e8edf5; font-size: 0.9rem;
+  outline: none; transition: border-color 0.2s;
+}
+.searchInput::placeholder { color: rgba(232, 237, 245, 0.3); }
+.searchInput:focus { border-color: rgba(168, 85, 247, 0.4); }
+
+.usersGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.userCard {
+  display: flex; flex-direction: column; gap: 0.75rem;
+  padding: 1.25rem; border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none; color: #e8edf5; transition: all 0.3s;
+}
+.userCard:hover { border-color: rgba(168, 85, 247, 0.3); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.08); }
+.userCardTop { display: flex; align-items: center; gap: 0.75rem; }
+.userCardAvatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.userCardInfo { flex: 1; min-width: 0; }
+.userCardName { font-size: 1rem; font-weight: 700; }
+.userCardUsername { font-size: 0.78rem; color: rgba(232, 237, 245, 0.35); }
+.userCardStats {
+  display: flex; gap: 0.75rem; font-size: 0.75rem; color: rgba(232, 237, 245, 0.5);
+}
+.userCardStats span { display: flex; align-items: center; gap: 3px; }
+.userCardBreakdown { display: flex; gap: 6px; }
+.breakdownPill {
+  display: flex; align-items: center; gap: 2px;
+  font-size: 0.7rem; font-weight: 600;
+}
+.userCardBottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.userCardJoined {
+  font-size: 0.68rem; color: rgba(232, 237, 245, 0.25);
+  white-space: nowrap;
+}
+
+/* Friend Buttons */
+.friendBtn {
+  display: flex; align-items: center; gap: 0.3rem;
+  padding: 0.35rem 0.75rem; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 600;
+  border: 1.5px solid; cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.friendBtnAdd {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #a855f7;
+}
+.friendBtnAdd:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: #a855f7;
+  transform: scale(1.05);
+}
+.friendBtnPending {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.2);
+  color: rgba(251, 191, 36, 0.6);
+  cursor: default;
+}
+.friendBtnConnected {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+.friendBtnConnected:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+.friendBtnAccept {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+.friendBtnAccept:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+.friendBtnReject {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: rgba(239, 68, 68, 0.6);
+  padding: 0.35rem 0.45rem;
+}
+.friendBtnReject:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+.friendActions {
+  display: flex; gap: 0.35rem;
+}
+.youBadge {
+  font-size: 0.7rem; font-weight: 600;
+  color: rgba(232, 237, 245, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.6rem; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.emptyState { text-align: center; padding: 3rem; color: rgba(232, 237, 245, 0.3); }
+
+@media (max-width: 768px) {
+  .tabBar { overflow-x: auto; }
+  .tabBtn { font-size: 0.82rem; padding: 0.6rem 0.6rem; white-space: nowrap; }
+  .leaderUser { min-width: 120px; }
+  .leaderRow { gap: 0.5rem; padding: 0.6rem; }
+  .badgeGrid { grid-template-columns: 1fr; }
+  .usersGrid { grid-template-columns: 1fr; }
+  .userCard { flex-wrap: wrap; }
+  .subTabs { overflow-x: auto; }
+}

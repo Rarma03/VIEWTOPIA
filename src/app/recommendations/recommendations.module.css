@@ -1,0 +1,318 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 0;
+}
+
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, #e8edf5 0%, #ff3d71 60%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle { font-size: 1rem; }
+.dark .subtitle,
+.light .subtitle { color: rgba(232, 237, 245, 0.45); }
+
+/* Tab Bar */
+.tabBar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+  padding-bottom: 0;
+}
+
+.tabBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: none;
+  color: rgba(232, 237, 245, 0.45);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tabBtn:hover {
+  color: rgba(232, 237, 245, 0.7);
+}
+
+.tabActive {
+  color: #e50914;
+  border-bottom-color: #e50914;
+}
+
+.tabBadge {
+  background: #e50914;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Friend Tag */
+.friendTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  margin-left: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Bundle Grid */
+.bundleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Bundle Card */
+.bundleCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bundleCard:hover {
+  transform: translateY(-6px);
+}
+
+.bundleDark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(168, 85, 247, 0.08);
+}
+
+.bundleDark:hover {
+  box-shadow: 0 20px 60px rgba(168, 85, 247, 0.15), 0 0 20px rgba(0, 212, 255, 0.05);
+  border-color: rgba(168, 85, 247, 0.2);
+}
+
+.bundleLight {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(168, 85, 247, 0.08);
+}
+
+.bundleLight:hover {
+  box-shadow: 0 20px 60px rgba(168, 85, 247, 0.15), 0 0 20px rgba(0, 212, 255, 0.05);
+  border-color: rgba(168, 85, 247, 0.2);
+}
+
+/* Poster Stack */
+.posterStack {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stackPoster {
+  position: absolute;
+  width: 110px;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease;
+}
+
+.bundleCard:hover .stackPoster {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.bundleCard:hover .stackPoster:nth-child(1) {
+  transform: rotate(-8deg) translateX(-4px) scale(1.02) !important;
+}
+
+.bundleCard:hover .stackPoster:nth-child(2) {
+  transform: rotate(0deg) translateX(8px) scale(1.05) !important;
+}
+
+.bundleCard:hover .stackPoster:nth-child(3) {
+  transform: rotate(8deg) translateX(20px) scale(1.02) !important;
+}
+
+.stackOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.bundleCard:hover .stackOverlay {
+  opacity: 0.15;
+}
+
+/* Bundle Info */
+.bundleInfo {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bundleUser {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bundleAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.bundleUserText {
+  display: flex;
+  flex-direction: column;
+}
+
+.bundleUserName {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.dark .bundleUserName,
+.light .bundleUserName { color: #e8edf5; }
+
+.bundleCount {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.dark .bundleCount,
+.light .bundleCount { color: rgba(232, 237, 245, 0.4); }
+
+.bundlePreview {
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.dark .bundlePreview,
+.light .bundlePreview { color: rgba(232, 237, 245, 0.45); }
+
+.bundleFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.dark .bundleFooter,
+.light .bundleFooter { border-top: 1px solid rgba(168, 85, 247, 0.08); }
+
+.bundleTitles {
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dark .bundleTitles { color: rgba(255, 255, 255, 0.3); }
+.light .bundleTitles { color: rgba(0, 0, 0, 0.35); }
+
+.bundleArrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.dark .bundleArrow { color: rgba(255, 255, 255, 0.3); }
+.light .bundleArrow { color: rgba(0, 0, 0, 0.3); }
+
+.bundleCard:hover .bundleArrow {
+  transform: translateX(4px);
+  color: #e50914;
+}
+
+/* Heart Badge */
+.heartBadge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Empty */
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.dark .empty p { color: rgba(255, 255, 255, 0.4); }
+.light .empty p { color: rgba(0, 0, 0, 0.4); }
+
+@media (max-width: 640px) {
+  .bundleGrid {
+    grid-template-columns: 1fr;
+  }
+}

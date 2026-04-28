@@ -1,0 +1,107 @@
+.page { min-height: 100vh; padding: 100px 20px 60px; }
+.container { max-width: 560px; margin: 0 auto; }
+
+.header { margin-bottom: 1.5rem; }
+.backBtn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.85rem; font-weight: 500; text-decoration: none;
+  padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+  color: rgba(232, 237, 245, 0.6);
+}
+.backBtn:hover { background: rgba(168, 85, 247, 0.08); color: #e8edf5; }
+
+.card {
+  padding: 1.5rem; border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1.5rem;
+}
+.cardHeader {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 1.5rem; color: #a855f7;
+}
+.title { font-size: 1.3rem; font-weight: 800; color: #e8edf5; }
+
+.form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.label {
+  display: flex; align-items: center; gap: 0.35rem;
+  font-size: 0.82rem; font-weight: 600; color: rgba(232, 237, 245, 0.6);
+}
+
+.input {
+  width: 100%; padding: 0.65rem 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px; color: #e8edf5;
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+}
+.input::placeholder { color: rgba(232, 237, 245, 0.25); }
+.input:focus { border-color: rgba(168, 85, 247, 0.4); }
+
+.usernameWrap {
+  display: flex; align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.usernameWrap:focus-within { border-color: rgba(168, 85, 247, 0.4); }
+.usernamePrefix {
+  padding: 0.65rem 0.3rem 0.65rem 0.9rem;
+  color: rgba(232, 237, 245, 0.3); font-size: 0.9rem; font-weight: 600;
+  flex-shrink: 0;
+}
+.usernameInput {
+  border: none !important; background: transparent !important;
+  padding-left: 0 !important; border-radius: 0 !important;
+}
+
+.hint { font-size: 0.72rem; color: rgba(232, 237, 245, 0.3); }
+.error {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.75rem; color: #ef4444; font-weight: 500;
+}
+.success {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.75rem; color: #10b981; font-weight: 500;
+}
+.urlPreview {
+  font-size: 0.75rem; color: rgba(232, 237, 245, 0.35);
+  margin-top: 0.2rem;
+}
+.urlPreview strong { color: #a855f7; }
+
+.saveBtn {
+  padding: 0.7rem 1.5rem; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, #a855f7, #8b5cf6);
+  color: #fff; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; align-self: flex-start;
+}
+.saveBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+.saveBtn:disabled {
+  opacity: 0.4; cursor: not-allowed; transform: none;
+}
+
+/* Danger Zone */
+.dangerCard {
+  padding: 1.25rem; border-radius: 14px;
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.12);
+}
+.dangerTitle {
+  font-size: 1rem; font-weight: 700; color: #ef4444; margin-bottom: 0.75rem;
+}
+.logoutBtn {
+  padding: 0.55rem 1.2rem; border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px; background: transparent;
+  color: #ef4444; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.logoutBtn:hover { background: #ef4444; color: #fff; }
+
+@media (max-width: 640px) {
+  .container { max-width: 100%; }
+  .card { padding: 1.25rem; }
+}

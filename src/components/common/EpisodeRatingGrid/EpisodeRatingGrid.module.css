@@ -1,0 +1,409 @@
+.wrapper {
+  margin-top: 32px;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light .wrapper,
+.wrapper.light {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.scrollX {
+  overflow-x: auto;
+  margin: 0 -4px;
+  padding: 0 4px 4px;
+}
+
+.grid {
+  display: grid;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.cellHeader {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 4px 6px;
+  opacity: 0.75;
+  min-width: 44px;
+}
+
+.cellRowLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: right;
+  padding: 4px 8px 4px 0;
+  opacity: 0.75;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.rowLabelWatched {
+  opacity: 1;
+  color: #818cf8;
+  font-weight: 700;
+}
+.light .rowLabelWatched,
+.wrapper.light .rowLabelWatched { color: #4f46e5; }
+
+.rowCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cell {
+  min-width: 44px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0c1117;
+  position: relative;
+  cursor: default;
+  transition: transform 0.12s ease;
+}
+
+.cell:hover { transform: scale(1.08); z-index: 2; }
+
+.cellEmpty {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+}
+
+.light .cellEmpty,
+.wrapper.light .cellEmpty {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.35);
+}
+
+/* Tier colors (also used by .dot) */
+.cinema  { background: #2196F3; color: #fff; }
+.awesome { background: #1B5E20; color: #fff; }
+.great   { background: #43A047; color: #fff; }
+.good    { background: #FDD835; color: #1a1a1a; }
+.regular { background: #FB8C00; color: #fff; }
+.bad     { background: #E53935; color: #fff; }
+.garbage { background: #6A1B9A; color: #fff; }
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 24px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  z-index: 5;
+  max-width: 240px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cell:hover .tooltip { opacity: 1; }
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.searchInputWrap {
+  position: relative;
+  flex: 1 1 240px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 30px 8px 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.searchInput:focus {
+  border-color: rgba(33, 150, 243, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.light .searchInput,
+.wrapper.light .searchInput {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.searchClear {
+  position: absolute;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.55;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.searchClear:hover { opacity: 1; }
+
+.searchMeta {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.moreBtn {
+  background: rgba(33, 150, 243, 0.15);
+  border: 1px solid rgba(33, 150, 243, 0.4);
+  color: inherit;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.moreBtn:hover {
+  background: rgba(33, 150, 243, 0.28);
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------------ */
+/* Progress (interactive last-watched-episode tracking)                */
+/* ------------------------------------------------------------------ */
+
+.progressBar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 14px;
+  align-items: center;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.10), rgba(33, 150, 243, 0.08));
+  border: 1px solid rgba(99, 102, 241, 0.22);
+}
+.light .progressBar,
+.wrapper.light .progressBar {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(33, 150, 243, 0.04));
+  border-color: rgba(99, 102, 241, 0.18);
+}
+
+.progressInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.progressInfo strong { font-weight: 700; }
+.progressIcon { color: #818cf8; flex-shrink: 0; }
+
+.progressActions {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.progressBtn,
+.progressBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease;
+}
+.progressBtn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+.progressBtn:hover { transform: translateY(-1px); }
+
+.progressBtnGhost {
+  background: transparent;
+  color: inherit;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.progressBtnGhost:hover { background: rgba(255, 255, 255, 0.06); }
+.light .progressBtnGhost,
+.wrapper.light .progressBtnGhost { border-color: rgba(0, 0, 0, 0.18); }
+.light .progressBtnGhost:hover,
+.wrapper.light .progressBtnGhost:hover { background: rgba(0, 0, 0, 0.05); }
+
+.progressTrack {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.light .progressTrack,
+.wrapper.light .progressTrack { background: rgba(0, 0, 0, 0.07); }
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Cell interactivity (button-based)                                   */
+/* ------------------------------------------------------------------ */
+
+button.cell {
+  border: none;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  /* Inherit existing cell sizing/colors. */
+}
+
+.cell.interactive { cursor: pointer; }
+.cell.interactive:hover { transform: scale(1.1); z-index: 3; }
+.cell.interactive:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  z-index: 3;
+}
+.cell:disabled { cursor: default; }
+
+/* Watched overlay: subtle dimming + saturated border */
+.cell.watched {
+  box-shadow: inset 0 0 0 2px rgba(99, 102, 241, 0.7);
+  filter: saturate(1.05);
+}
+.cell.watched.cellEmpty {
+  background: rgba(99, 102, 241, 0.18);
+  color: #c7d2fe;
+  font-weight: 700;
+}
+.light .cell.watched.cellEmpty,
+.wrapper.light .cell.watched.cellEmpty {
+  background: rgba(99, 102, 241, 0.18);
+  color: #4f46e5;
+}
+
+/* Exact-progress cell: highlight ring */
+.cell.exactProgress {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #6366f1;
+  z-index: 2;
+}
+.light .cell.exactProgress,
+.wrapper.light .cell.exactProgress {
+  box-shadow: 0 0 0 2px #1a1a24, 0 0 0 4px #6366f1;
+}
+
+/* Tiny check badge in corner of watched, scored cells (legacy — no longer rendered;
+   row-label check is used instead). */
+.watchedBadge { display: none; }
+
+@media (max-width: 600px) {
+  .progressBar { grid-template-columns: 1fr; }
+  .progressActions { justify-content: flex-start; }
+}

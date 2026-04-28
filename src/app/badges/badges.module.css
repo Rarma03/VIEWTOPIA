@@ -1,0 +1,269 @@
+.page {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffd700, #f59e0b, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  color: rgba(232, 237, 245, 0.45);
+  font-size: 0.95rem;
+}
+
+/* Stats bar */
+.statsBar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statValue {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e8edf5;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: rgba(232, 237, 245, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statDivider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progressBarWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progressBarBg {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #a855f7, #ffd700);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.progressText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffd700;
+  white-space: nowrap;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filterBtn {
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(232, 237, 245, 0.5);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterBtn:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #e8edf5;
+}
+
+.filterActive {
+  border-color: #a855f7;
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.08);
+}
+
+/* Badge Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.badgeCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.badgeUnlocked {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.badgeUnlocked:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.1);
+}
+
+.badgeLocked {
+  background: rgba(255, 255, 255, 0.02);
+  opacity: 0.65;
+}
+
+.badgeLocked:hover {
+  opacity: 0.85;
+}
+
+.badgeIconWrap {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1.5px solid;
+  transition: all 0.3s;
+}
+
+.badgeInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.badgeName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e8edf5;
+  margin-bottom: 2px;
+}
+
+.badgeDesc {
+  font-size: 0.8rem;
+  color: rgba(232, 237, 245, 0.5);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.badgeTags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.diffTag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.catTag {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.badgeProgress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+
+.badgeProgressBar {
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.badgeProgressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.badgeProgressText {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(232, 237, 245, 0.4);
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(232, 237, 245, 0.3);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsBar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .progressBarWrap {
+    width: 100%;
+  }
+}

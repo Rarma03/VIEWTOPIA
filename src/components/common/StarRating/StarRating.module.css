@@ -1,0 +1,65 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  line-height: 1;
+  display: flex;
+}
+
+.star.readonly {
+  cursor: default;
+}
+
+.starIcon {
+  position: relative;
+  display: inline-flex;
+}
+
+.starEmpty {
+  color: rgba(168, 85, 247, 0.2);
+}
+
+:global(.light-mode) .starEmpty,
+[data-theme="light"] .starEmpty {
+  color: rgba(168, 85, 247, 0.2);
+}
+
+.star.empty .starEmpty {
+  color: rgba(168, 85, 247, 0.2);
+}
+
+:global(.light-mode) .star.empty .starEmpty,
+[data-theme="light"] .star.empty .starEmpty {
+  color: rgba(168, 85, 247, 0.2);
+}
+
+.starFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ffd700;
+  overflow: hidden;
+}
+
+.value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(232, 237, 245, 0.7);
+}
+
+:global(.light-mode) .value {
+  color: rgba(232, 237, 245, 0.7);
+}

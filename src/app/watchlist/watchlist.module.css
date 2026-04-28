@@ -1,0 +1,208 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 0;
+}
+
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, #e8edf5 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle { font-size: 1rem; }
+
+.shareBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.75rem;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #a855f7, #00d4ff);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.shareBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Export button (lives in the filter bar, pushed to the right edge) */
+.exportWrap {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.exportBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  border: none;
+  border-radius: 10px;
+  color: #1a1a2e;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.exportBtn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+}
+
+.exportMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 50;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.exportMenu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #e8edf5;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.exportMenu button:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+}
+
+.exportMenu button.lockedItem {
+  color: rgba(232, 237, 245, 0.55);
+}
+
+.exportMenu button.lockedItem:hover {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c4b5fd;
+}
+
+.lockBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #a855f7, #ffd700);
+  color: #1a1a2e;
+}
+
+.dark .subtitle,
+.light .subtitle { color: rgba(232, 237, 245, 0.45); }
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterTab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.dark .filterTab {
+  color: rgba(232, 237, 245, 0.5);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.light .filterTab {
+  color: rgba(232, 237, 245, 0.5);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.filterTab.activeTab {
+  background: linear-gradient(135deg, #e50914, #a855f7);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+.count {
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.dark .count,
+.light .count { background: rgba(168, 85, 247, 0.15); }
+.activeTab .count { background: rgba(255, 255, 255, 0.2); }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.dark .empty p,
+.light .empty p { color: rgba(232, 237, 245, 0.4); }

@@ -1,0 +1,30 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px auto 8px;
+  flex-wrap: wrap;
+}
+
+.meta {
+  font-size: 0.82rem;
+  opacity: 0.65;
+}
+
+.btn {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: inherit;
+  padding: 9px 22px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.btn:hover {
+  background: rgba(99, 102, 241, 0.28);
+  transform: translateY(-1px);
+}

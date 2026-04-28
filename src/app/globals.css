@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+/* ==================== CSS Custom Properties ==================== */
+:root {
+  --bg-primary: #050208;
+  --bg-secondary: #0a0612;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text-primary: #e8edf5;
+  --text-secondary: rgba(232, 237, 245, 0.6);
+  --text-muted: rgba(232, 237, 245, 0.35);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent: #e50914;
+  --accent-hover: #ff2d2d;
+  --gold: #ffd700;
+  --purple: #a855f7;
+  --cyan: #00d4ff;
+  --magenta: #ff3d71;
+  --teal: #2dd4bf;
+  --success: #22c55e;
+
+  /* Glow effects */
+  --glow-red: 0 0 20px rgba(229, 9, 20, 0.25);
+  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.2);
+  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.2);
+  --glow-gold: 0 0 15px rgba(255, 215, 0, 0.2);
+
+  /* Gradient accents */
+  --gradient-accent: linear-gradient(135deg, #e50914, #a855f7);
+  --gradient-border: linear-gradient(90deg, #e50914, #a855f7, #00d4ff);
+  --gradient-text: linear-gradient(135deg, #e50914 0%, #ff6b6b 40%, #a855f7 100%);
+  --gradient-cyan: linear-gradient(135deg, #00d4ff, #a855f7);
+  --gradient-warm: linear-gradient(135deg, #ff6b6b, #ffd700);
+
+  --font-sans: var(--font-main), 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Light mode disabled — dark-only design */
+[data-theme='light'] {
+  --bg-primary: #050208;
+  --bg-secondary: #0a0612;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text-primary: #e8edf5;
+  --text-secondary: rgba(232, 237, 245, 0.6);
+  --text-muted: rgba(232, 237, 245, 0.35);
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ==================== Reset & Base ==================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Desktop-only shrink so the design fits 1440-class screens without
+     overflowing. On phones / tablets we render at native 1:1 so tap targets,
+     fonts and `vw`-based grids stay legible. */
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 1025px) {
+  html { zoom: 0.75; }
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #050208;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(139, 92, 246, 0.12) 40px,
+      rgba(168, 85, 247, 0.08) 42px,
+      transparent 42px,
+      transparent 80px,
+      rgba(229, 9, 20, 0.10) 80px,
+      rgba(255, 59, 48, 0.06) 82px,
+      transparent 82px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(109, 40, 217, 0.08) 60px,
+      rgba(139, 92, 246, 0.05) 62px,
+      transparent 62px
+    ),
+    linear-gradient(180deg, #050208 0%, #08030f 50%, #050208 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+body.dark,
+body.light {
+  background-color: #050208;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(139, 92, 246, 0.12) 40px,
+      rgba(168, 85, 247, 0.08) 42px,
+      transparent 42px,
+      transparent 80px,
+      rgba(229, 9, 20, 0.10) 80px,
+      rgba(255, 59, 48, 0.06) 82px,
+      transparent 82px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(109, 40, 217, 0.08) 60px,
+      rgba(139, 92, 246, 0.05) 62px,
+      transparent 62px
+    ),
+    linear-gradient(180deg, #050208 0%, #08030f 50%, #050208 100%);
+  background-attachment: fixed;
+  color: #e8edf5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* iOS Safari auto-zooms when focusing a form control whose font-size is < 16px.
+   Force at least 16px on phones to preserve the user's chosen zoom level. */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
+}
+
+/* Prevent layout-breaking horizontal scroll from any rogue full-bleed element. */
+html, body {
+  overflow-x: hidden;
+}
+
+/* ==================== Scrollbar ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body.dark ::-webkit-scrollbar-thumb,
+body.light ::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+/* ==================== Selection ==================== */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: #fff;
+}
+
+/* ==================== Focus Styles ==================== */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}

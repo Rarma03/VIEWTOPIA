@@ -1,0 +1,323 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 0;
+}
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: rgba(232, 237, 245, 0.5);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.25rem;
+  transition: color 0.2s;
+}
+.backBtn:hover { color: #00d4ff; }
+
+.notFound {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(232, 237, 245, 0.4);
+}
+
+/* Info Card */
+.infoCard {
+  display: flex;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.poster {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.noPoster {
+  width: 120px;
+  height: 180px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(232, 237, 245, 0.2);
+}
+
+.infoRight { flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+
+.movieTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #e8edf5;
+}
+
+.countdown {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  color: #fff;
+  width: fit-content;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.details span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: rgba(232, 237, 245, 0.55);
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #00d4ff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  transition: background 0.2s, color 0.2s;
+}
+.mapLink:hover {
+  background: rgba(0, 212, 255, 0.25);
+  color: #fff;
+}
+
+.memberList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.member {
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+.member.creator {
+  background: rgba(0, 212, 255, 0.12);
+  color: #00d4ff;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.joinBtn, .leaveBtn, .deleteBtn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.joinBtn {
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  color: #fff;
+}
+.joinBtn:hover { opacity: 0.9; }
+.joinBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.leaveBtn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+.deleteBtn:hover { background: rgba(239, 68, 68, 0.2); }
+
+/* Chat Section */
+.chatSection {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.chatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e8edf5;
+  margin-bottom: 0.2rem;
+}
+
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.chatNote {
+  font-size: 0.72rem;
+  color: rgba(232, 237, 245, 0.3);
+  margin-bottom: 1rem;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+}
+
+.noMessages {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(232, 237, 245, 0.25);
+  font-size: 0.85rem;
+}
+
+.msg {
+  max-width: 80%;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.msg.msgOwn {
+  align-self: flex-end;
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.1);
+}
+
+.msgHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2px;
+}
+
+.msgAuthor {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a855f7;
+}
+.msgOwn .msgAuthor { color: #00d4ff; }
+
+.msgTime {
+  font-size: 0.68rem;
+  color: rgba(232, 237, 245, 0.25);
+}
+
+.msgText {
+  font-size: 0.84rem;
+  color: rgba(232, 237, 245, 0.8);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* Input Row */
+.inputRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #e8edf5;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.chatInput:focus { border-color: rgba(0, 212, 255, 0.4); }
+.chatInput::placeholder { color: rgba(232, 237, 245, 0.25); }
+
+.sendBtn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+}
+.sendBtn:hover { opacity: 0.9; }
+.sendBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .infoCard { flex-direction: column; align-items: center; text-align: center; }
+  .infoRight { align-items: center; }
+  .memberList { justify-content: center; }
+  .actions { justify-content: center; }
+  .msg { max-width: 90%; }
+}

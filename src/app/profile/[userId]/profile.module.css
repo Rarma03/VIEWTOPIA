@@ -1,0 +1,406 @@
+.page { min-height: calc(100vh - 64px); }
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+/* ─── Hero ─── */
+.hero { padding: 2rem 0 1.5rem; margin-bottom: 2rem; }
+.heroInner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+.heroTop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+
+.backBtn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.85rem; font-weight: 500; text-decoration: none;
+  padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+  color: rgba(232, 237, 245, 0.6);
+}
+.backBtn:hover { background: rgba(168, 85, 247, 0.08); color: #e8edf5; }
+
+.shareBtn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.08); color: #a855f7;
+  font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.shareBtn:hover { background: rgba(168, 85, 247, 0.15); border-color: #a855f7; }
+
+.profileInfo { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+.avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.profileText { display: flex; flex-direction: column; gap: 0.15rem; }
+.profileName { font-size: 1.8rem; font-weight: 800; line-height: 1.1; color: #e8edf5; }
+.profileUsername { font-size: 0.9rem; font-weight: 500; color: rgba(232, 237, 245, 0.4); }
+
+.profileMeta { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.3rem; }
+.joinDate { display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: rgba(232, 237, 245, 0.35); }
+.youBadge {
+  padding: 0.15rem 0.5rem; border-radius: 12px;
+  font-size: 0.7rem; font-weight: 700;
+  background: rgba(168, 85, 247, 0.15); color: #a855f7;
+}
+.tasteBadge {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.75rem; font-weight: 600;
+}
+
+/* Hero Stats */
+.heroStats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.heroStat { display: flex; align-items: center; gap: 0.4rem; color: rgba(232, 237, 245, 0.5); }
+.heroStatValue { font-size: 1.1rem; font-weight: 800; color: #e8edf5; }
+.heroStatLabel { font-size: 0.78rem; font-weight: 500; }
+
+/* ─── Container ─── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+
+/* ─── Sections ─── */
+.section { margin-bottom: 2rem; }
+.sectionTitle {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 1.15rem; font-weight: 700; color: #e8edf5; margin-bottom: 1rem;
+}
+
+/* ─── Watch Activity Graph ─── */
+/* Graph + Badges Two-Column */
+.graphBadgesRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  align-items: stretch;
+}
+@media (max-width: 768px) {
+  .graphBadgesRow { grid-template-columns: 1fr; }
+}
+.graphCol { min-width: 0; }
+.badgesCol { min-width: 0; }
+.badgesCol .graphSection { height: 100%; margin-bottom: 0; display: flex; flex-direction: column; }
+.badgesCol .badgesGrid { flex: 1; align-content: start; }
+
+.graphSection {
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+}
+.graphHeader { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+.graphControls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.rangeTabs { display: flex; gap: 0.25rem; padding: 2px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; }
+.rangeTab { padding: 0.3rem 0.65rem; border: none; border-radius: 6px; background: transparent; color: rgba(232, 237, 245, 0.45); font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.rangeTab:hover { color: #e8edf5; }
+.rangeTabActive { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+.graphLegend { display: flex; gap: 1rem; }
+.legendItem { display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: rgba(232, 237, 245, 0.5); }
+.legendDot { width: 8px; height: 8px; border-radius: 50%; }
+.graphSvg { width: 100%; height: auto; }
+
+/* ─── Badges ─── */
+.badgesHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.viewAllBadges { font-size: 0.8rem; color: #a855f7; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.viewAllBadges:hover { color: #c084fc; }
+.badgesGrid { display: flex; flex-wrap: wrap; gap: 12px; }
+.profileBadge { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 72px; }
+.profileBadgeIcon {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; border: 1.5px solid; transition: transform 0.2s;
+}
+.profileBadge:hover .profileBadgeIcon { transform: scale(1.1); }
+.profileBadgeName {
+  font-size: 0.65rem; font-weight: 500; text-align: center;
+  color: rgba(232, 237, 245, 0.6); line-height: 1.2;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.moreBadges {
+  display: flex; align-items: center; justify-content: center;
+  width: 72px; height: 48px; font-size: 0.75rem; font-weight: 600;
+  color: #a855f7; text-decoration: none;
+  border: 1px dashed rgba(168, 85, 247, 0.3); border-radius: 12px; transition: all 0.2s;
+}
+.moreBadges:hover { background: rgba(168, 85, 247, 0.08); border-color: #a855f7; }
+
+/* ─── Currently Watching ─── */
+.watchingGrid {
+  display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+.watchingCard {
+  flex-shrink: 0; width: 100px; text-decoration: none; color: #e8edf5;
+  transition: transform 0.2s;
+}
+.watchingCard:hover { transform: translateY(-4px); }
+.watchingPoster {
+  position: relative; width: 100px; height: 140px;
+  border-radius: 10px; overflow: hidden; margin-bottom: 0.4rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+.watchingTitle {
+  font-size: 0.72rem; font-weight: 500; display: block;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: rgba(232, 237, 245, 0.7);
+}
+
+/* ─── Tab Bar ─── */
+.tabBar {
+  display: flex; gap: 4px; padding: 4px;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px; margin-bottom: 1.5rem;
+}
+.tabBtn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.6rem 1rem; border: none; border-radius: 10px;
+  background: transparent; color: rgba(232, 237, 245, 0.5);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.tabBtn:hover { color: #e8edf5; background: rgba(255, 255, 255, 0.04); }
+.tabActive {
+  background: rgba(168, 85, 247, 0.12) !important;
+  color: #a855f7 !important;
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.1);
+}
+.tabCount {
+  font-size: 0.7rem; font-weight: 700;
+  padding: 0.1rem 0.45rem; border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06); color: rgba(232, 237, 245, 0.4);
+}
+.tabActive .tabCount { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+/* ─── Rating Distribution Chart ─── */
+.chartHint { font-size: 0.75rem; color: rgba(232, 237, 245, 0.3); margin-bottom: 0.8rem; }
+.chart {
+  display: flex; align-items: flex-end; gap: 0.5rem;
+  height: 150px; padding: 0 0.5rem;
+}
+.barCol {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 0.3rem; height: 100%; cursor: pointer; transition: opacity 0.2s;
+  justify-content: flex-end;
+}
+.barSelected { }
+.barInactive { opacity: 0.25; }
+.barCount { font-size: 0.7rem; font-weight: 600; color: rgba(232, 237, 245, 0.5); min-height: 16px; }
+.bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; transition: all 0.3s; }
+.barLabel {
+  display: flex; align-items: center; gap: 2px;
+  font-size: 0.7rem; color: rgba(232, 237, 245, 0.4); white-space: nowrap;
+}
+
+/* ─── Filter Bar ─── */
+.filterBar {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  gap: 0.75rem; padding: 0.6rem 0; margin-bottom: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.filterLeft { display: flex; align-items: center; gap: 0.5rem; color: rgba(232, 237, 245, 0.4); }
+.filterLabel { font-size: 0.8rem; }
+.filterRight { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.typePill {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.35rem 0.8rem; border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px; background: transparent;
+  color: rgba(232, 237, 245, 0.5); font-size: 0.78rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.typePill:hover { border-color: rgba(229, 9, 20, 0.4); color: #e8edf5; }
+.clearBtn {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.35rem 0.8rem; border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px; background: rgba(239, 68, 68, 0.08);
+  color: #ef4444; font-size: 0.78rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.clearBtn:hover { background: rgba(239, 68, 68, 0.15); }
+
+/* ─── Watched Grid ─── */
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+  gap: 1rem; justify-content: start;
+}
+.card {
+  text-decoration: none; color: #e8edf5;
+  border-radius: 12px; overflow: hidden; transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+}
+.card:hover { border-color: rgba(168, 85, 247, 0.3); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(168, 85, 247, 0.1); }
+.cardPoster { position: relative; width: 100%; aspect-ratio: 3/4; background: rgba(255, 255, 255, 0.03); }
+.noPoster { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: rgba(232, 237, 245, 0.2); }
+.ratingBadge {
+  position: absolute; top: 8px; right: 8px;
+  display: flex; align-items: center; gap: 3px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 0.75rem; font-weight: 700; color: #fff;
+}
+.typeBadge {
+  position: absolute; bottom: 8px; left: 8px;
+  padding: 2px 6px; border-radius: 4px;
+  font-size: 0.65rem; font-weight: 600;
+  background: rgba(0, 0, 0, 0.7); color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+}
+.cardInfo { padding: 0.6rem 0.7rem; }
+.cardTitle {
+  font-size: 0.82rem; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  margin-bottom: 2px;
+}
+.cardDate { font-size: 0.7rem; color: rgba(232, 237, 245, 0.35); }
+.cardNote {
+  font-size: 0.7rem; color: rgba(232, 237, 245, 0.4);
+  margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-style: italic;
+}
+
+/* ─── Status Filters (My List) ─── */
+.statusFilters {
+  display: flex; align-items: center; gap: 4px; padding: 4px;
+  background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px; margin-bottom: 1rem; overflow: visible;
+  flex-wrap: wrap;
+}
+.statusTab {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.8rem; border: none; border-radius: 8px;
+  background: transparent; color: rgba(232, 237, 245, 0.45);
+  font-size: 0.8rem; font-weight: 500; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.statusTab:hover { color: #e8edf5; background: rgba(255, 255, 255, 0.03); }
+.statusActive { background: rgba(229, 9, 20, 0.1) !important; color: #e50914 !important; }
+.myListGrid { display: flex; flex-direction: column; gap: 0.5rem; }
+
+/* ─── Download / Export menu (My List) ─── */
+.exportWrap { position: relative; margin-left: auto; }
+.exportBtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border: none; border-radius: 8px;
+  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  color: #1a1a2e; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.exportBtn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255, 215, 0, 0.3); }
+.exportMenu {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  min-width: 200px; background: #1a1a2e;
+  border: 1px solid rgba(255, 215, 0, 0.18); border-radius: 10px;
+  overflow: hidden; z-index: 50; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.exportMenu button {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  width: 100%; padding: 10px 14px; background: transparent; border: none;
+  color: #e8edf5; font-size: 0.82rem; text-align: left; cursor: pointer;
+  transition: background 0.15s;
+}
+.exportMenu button:hover { background: rgba(255, 215, 0, 0.1); color: #ffd700; }
+.exportMenu button.lockedItem { color: rgba(232, 237, 245, 0.55); }
+.exportMenu button.lockedItem:hover { background: rgba(168, 85, 247, 0.12); color: #c4b5fd; }
+.lockBadge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 7px; border-radius: 999px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #a855f7, #ffd700); color: #1a1a2e;
+}
+
+/* ─── Collections Grid ─── */
+.collectionsGrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+}
+.collectionCard {
+  color: #e8edf5;
+  border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px;
+  overflow: hidden; transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.03);
+}
+.collectionCard:hover { border-color: rgba(168, 85, 247, 0.3); transform: translateY(-3px); }
+.collectionLink { display: block; text-decoration: none; color: inherit; }
+.collectionPosters {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  height: 80px; overflow: hidden;
+}
+.collectionThumb { position: relative; width: 100%; height: 80px; background: rgba(255, 255, 255, 0.04); }
+.collectionInfo { padding: 0.8rem; }
+.collectionName { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+.collectionMeta { font-size: 0.75rem; color: rgba(232, 237, 245, 0.4); }
+.collectionDesc {
+  font-size: 0.75rem; color: rgba(232, 237, 245, 0.35); margin-top: 4px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.collectionShareBtn {
+  display: flex; align-items: center; gap: 0.35rem;
+  margin: 0 0.8rem 0.7rem; padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 6px;
+  background: rgba(168, 85, 247, 0.06); color: #a855f7;
+  font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.collectionShareBtn:hover { background: rgba(168, 85, 247, 0.15); border-color: #a855f7; }
+
+/* ─── Activity List ─── */
+.activityList { display: flex; flex-direction: column; gap: 0.5rem; }
+.activityCard {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0.8rem; border-radius: 10px;
+  text-decoration: none; color: #e8edf5; transition: background 0.2s;
+  background: rgba(255, 255, 255, 0.02);
+}
+.activityCard:hover { background: rgba(255, 255, 255, 0.05); }
+.activityPoster {
+  position: relative; width: 40px; height: 56px;
+  border-radius: 6px; overflow: hidden; flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+}
+.activityInfo { flex: 1; min-width: 0; }
+.activityAction {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #a855f7;
+}
+.activityTitle {
+  display: block; font-size: 0.85rem; font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.activityTime { font-size: 0.7rem; color: rgba(232, 237, 245, 0.35); }
+.activityRating {
+  display: flex; align-items: center; gap: 3px;
+  color: #ffd700; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+}
+
+/* ─── Empty State ─── */
+.empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 3rem 1rem;
+  color: rgba(232, 237, 245, 0.3); text-align: center;
+}
+.actionLink {
+  font-size: 0.85rem; font-weight: 600; color: #a855f7;
+  text-decoration: none; padding: 0.4rem 1rem;
+  border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 8px;
+  transition: all 0.2s;
+}
+.actionLink:hover { background: rgba(168, 85, 247, 0.1); }
+.backLink {
+  display: inline-block; margin-top: 1rem;
+  padding: 0.5rem 1.5rem; border-radius: 8px;
+  background: #e50914; color: #fff; font-weight: 600;
+  text-decoration: none; transition: background 0.2s;
+}
+.backLink:hover { background: #c40812; }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .profileInfo { gap: 1rem; }
+  .avatar { width: 56px; height: 56px; font-size: 1.5rem; }
+  .profileName { font-size: 1.4rem; }
+  .heroStats { gap: 1rem; }
+  .chart { height: 120px; gap: 0.4rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .filterBar { flex-direction: column; align-items: flex-start; }
+  .tabBar { overflow-x: auto; }
+  .tabBtn { font-size: 0.78rem; padding: 0.5rem 0.6rem; white-space: nowrap; }
+  .collectionsGrid { grid-template-columns: 1fr; }
+  .badgesGrid { gap: 8px; }
+  .profileBadge { width: 60px; }
+  .profileBadgeIcon { width: 40px; height: 40px; }
+  .graphSection { padding: 0.8rem; }
+}

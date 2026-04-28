@@ -1,0 +1,226 @@
+.card {
+  display: flex;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.card.dark {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.08);
+}
+
+.card.light {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.08);
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.12);
+}
+
+.posterWrapper {
+  position: relative;
+  width: 120px;
+  min-width: 120px;
+  min-height: 180px;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+.statusBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.info {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+.dark .title,
+.light .title { color: #e8edf5; }
+.title:hover { color: #00d4ff; }
+
+.typeBadge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dark .typeBadge {
+  background: rgba(168, 85, 247, 0.1);
+  color: rgba(168, 85, 247, 0.8);
+}
+
+.light .typeBadge {
+  background: rgba(168, 85, 247, 0.1);
+  color: rgba(168, 85, 247, 0.8);
+}
+
+.ratingRow {
+  margin: 0.2rem 0;
+}
+
+.dateRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.dark .dateRow,
+.light .dateRow { color: rgba(232, 237, 245, 0.45); }
+
+.notes {
+  font-size: 0.8rem;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dark .notes,
+.light .notes { color: rgba(232, 237, 245, 0.4); }
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.statusSelector {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.statusBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.dark .statusBtn { color: rgba(232, 237, 245, 0.4); border-color: rgba(168, 85, 247, 0.08); }
+.light .statusBtn { color: rgba(232, 237, 245, 0.4); border-color: rgba(168, 85, 247, 0.08); }
+
+.statusBtn.activeStatus {
+  font-weight: 600;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.actionBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.dark .actionBtn { color: rgba(232, 237, 245, 0.4); }
+.light .actionBtn { color: rgba(232, 237, 245, 0.4); }
+
+.dark .actionBtn:hover { background: rgba(168, 85, 247, 0.08); color: #e8edf5; }
+.light .actionBtn:hover { background: rgba(168, 85, 247, 0.08); color: #e8edf5; }
+
+.deleteBtn:hover { color: #dc3545 !important; }
+
+/* Date Picker */
+.datePicker {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.dateInput {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: inherit;
+}
+
+.dateActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dateSaveBtn {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dateClearBtn {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+@media (max-width: 640px) {
+  .card { flex-direction: column; }
+  .posterWrapper { width: 100%; min-height: 200px; }
+  .statusSelector { flex-wrap: wrap; }
+}

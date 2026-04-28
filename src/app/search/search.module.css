@@ -1,0 +1,321 @@
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 0;
+}
+
+.page.dark { background: transparent; }
+.page.light { background: transparent; }
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.searchSection {
+  padding-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Inline Search Input */
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+
+.dark .searchInputWrapper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.light .searchInputWrapper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.dark .searchInputWrapper:focus-within,
+.light .searchInputWrapper:focus-within { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.1); }
+
+.searchIcon { flex-shrink: 0; }
+.dark .searchIcon,
+.light .searchIcon { color: rgba(168, 85, 247, 0.5); }
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.05rem;
+  font-family: inherit;
+}
+
+.dark .searchInput,
+.light .searchInput { color: #e8edf5; }
+.dark .searchInput::placeholder,
+.light .searchInput::placeholder { color: rgba(232, 237, 245, 0.3); }
+
+.searchSpinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(168, 85, 247, 0.2);
+  border-top-color: #a855f7;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.searchClearBtn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.dark .searchClearBtn,
+.light .searchClearBtn { color: rgba(232, 237, 245, 0.5); }
+.searchClearBtn:hover { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+/* Category Filter Buttons */
+.categoryFilters {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.categoryBtn {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dark .categoryBtn,
+.light .categoryBtn { background: rgba(255, 255, 255, 0.06); color: rgba(232, 237, 245, 0.5); }
+
+.dark .categoryBtn:hover,
+.light .categoryBtn:hover { background: rgba(168, 85, 247, 0.1); color: #e8edf5; }
+
+.categoryActive { background: linear-gradient(135deg, #e50914, #a855f7) !important; color: #fff !important; }
+
+/* Person (Director/Actor) Filter */
+.personFilter {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.personInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.dark .personInputWrapper {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light .personInputWrapper {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.personIcon { flex-shrink: 0; }
+.dark .personIcon,
+.light .personIcon { color: rgba(232, 237, 245, 0.4); }
+
+.personInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.dark .personInput,
+.light .personInput { color: #e8edf5; }
+.dark .personInput::placeholder,
+.light .personInput::placeholder { color: rgba(232, 237, 245, 0.3); }
+
+.personSpinner { font-size: 0.85rem; }
+
+.selectedPerson {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+}
+
+.dark .selectedPerson {
+  background: rgba(168, 85, 247, 0.12);
+  color: #e8edf5;
+}
+
+.light .selectedPerson {
+  background: rgba(168, 85, 247, 0.12);
+  color: #e8edf5;
+}
+
+.selectedPersonImg {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.personDept {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.dark .personDept,
+.light .personDept { background: rgba(168, 85, 247, 0.1); color: rgba(168, 85, 247, 0.7); }
+
+.personClearBtn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem;
+  border-radius: 50%;
+  color: #e50914;
+  transition: background 0.2s;
+}
+
+.personClearBtn:hover { background: rgba(229, 9, 20, 0.15); }
+
+.personDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.dark .personDropdown {
+  background: #0c1019;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 10px rgba(168, 85, 247, 0.05);
+}
+
+.light .personDropdown {
+  background: #0c1019;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 10px rgba(168, 85, 247, 0.05);
+}
+
+.personOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.dark .personOption:hover,
+.light .personOption:hover { background: rgba(168, 85, 247, 0.08); }
+
+.personOptionImg {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.personOptionPlaceholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dark .personOptionPlaceholder,
+.light .personOptionPlaceholder { background: rgba(168, 85, 247, 0.1); color: rgba(168, 85, 247, 0.5); }
+
+.personOptionInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.personOptionName {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.dark .personOptionName,
+.light .personOptionName { color: #e8edf5; }
+
+.personOptionDept {
+  font-size: 0.72rem;
+}
+
+.dark .personOptionDept,
+.light .personOptionDept { color: rgba(232, 237, 245, 0.4); }
+
+.resultTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.dark .resultTitle,
+.light .resultTitle { color: rgba(232, 237, 245, 0.7); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.noResults {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.noResultsIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.dark .noResults p { color: rgba(255, 255, 255, 0.4); }
+.light .noResults p { color: rgba(0, 0, 0, 0.4); }
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
