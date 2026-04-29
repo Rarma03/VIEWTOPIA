@@ -14,6 +14,7 @@ import {
   HiClock,
   HiTrash,
   HiXMark,
+  HiLockClosed,
 } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
 import { MangaItem } from '@/types';
@@ -79,6 +80,13 @@ function ReadPageInner() {
   const initialQuery = searchParams.get('q') ?? '';
 
   const [category, setCategory] = useState<Category>(initialCategory);
+  // While a search is active we don't apply the category filter automatically
+  // — users found it confusing because changing the JP/KR/CN selection in
+  // browse mode would silently exclude their search hits. Instead, search
+  // returns ALL types by default and the user can opt in to narrow by
+  // clicking a category card. Selection is per-search and resets whenever
+  // the search query changes.
+  const [searchTypeOverride, setSearchTypeOverride] = useState<Category | null>(null);
   const [rankFilter, setRankFilter] = useState<RankFilter>(initialFilter);
   const [viewMode, setViewMode] = useState<ViewMode>(initialView);
   const [searchQuery, setSearchQuery] = useState(initialQuery);
@@ -123,6 +131,12 @@ function ReadPageInner() {
     });
   }, [userId, refreshTracker]);
 
+  // If a logged-out user lands on /read?view=mylist via deep link, bounce
+  // them back to Browse — My List is gated and shouldn't be openable.
+  useEffect(() => {
+    if (!userId && viewMode === 'mylist') setViewMode('browse');
+  }, [userId, viewMode]);
+
   // URL sync
   useEffect(() => {
     const params = new URLSearchParams();
@@ -140,7 +154,10 @@ function ReadPageInner() {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  useEffect(() => { setPage(1); }, [category, rankFilter, debouncedQuery, viewMode]);
+  // Reset the per-search category override whenever the active query changes.
+  useEffect(() => { setSearchTypeOverride(null); }, [debouncedQuery]);
+
+  useEffect(() => { setPage(1); }, [category, rankFilter, debouncedQuery, viewMode, searchTypeOverride]);
 
   const fetchIdRef = useRef(0);
 
@@ -159,8 +176,11 @@ function ReadPageInner() {
       setError(null);
       try {
         const topFilter = rankFilter === 'top' ? undefined : rankFilter;
+        // Search: only narrow by type if the user explicitly clicked a card
+        // during this search. Browse: use the persistent category selection.
+        const searchType = searchTypeOverride ?? undefined;
         const res = debouncedQuery
-          ? await searchManga(debouncedQuery, targetPage, category)
+          ? await searchManga(debouncedQuery, targetPage, searchType)
           : await getTopManga(targetPage, category, topFilter);
         if (myFetchId !== fetchIdRef.current) return;
         const data = res.data || [];
@@ -180,7 +200,7 @@ function ReadPageInner() {
     // mangaList.length intentionally omitted: we don't want a fetch loop, only
     // the snapshot at call time matters and is captured via closure.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category, rankFilter, debouncedQuery, viewMode],
+    [category, rankFilter, debouncedQuery, viewMode, searchTypeOverride],
   );
 
   useEffect(() => {
@@ -245,24 +265,42 @@ function ReadPageInner() {
         </motion.div>
 
         <div className={styles.categoryBoxes}>
-          {CATEGORIES.map((c) => (
-            <motion.button
-              key={c.key}
-              className={`${styles.categoryBox} ${category === c.key ? styles.active : ''}`}
-              onClick={() => setCategory(c.key)}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className={styles.categoryIcon}>{c.icon}</span>
-              <span className={styles.categoryLabel}>{c.label}</span>
-              <span className={styles.categoryCount}>
-                {myListCounts[c.key] > 0
-                  ? `${myListCounts[c.key]} in your list • ${c.desc}`
-                  : c.desc}
-              </span>
-              <div className={styles.categoryGlow} />
-            </motion.button>
-          ))}
+          {CATEGORIES.map((c) => {
+            const isSearching = Boolean(debouncedQuery);
+            const isActive = isSearching
+              ? searchTypeOverride === c.key
+              : category === c.key;
+            const handleClick = () => {
+              if (isSearching) {
+                // Toggle the per-search narrow filter.
+                setSearchTypeOverride((prev) => (prev === c.key ? null : c.key));
+              } else {
+                setCategory(c.key);
+              }
+            };
+            let tooltip: string | undefined;
+            if (isSearching && isActive) tooltip = 'Click again to show all types';
+            else if (isSearching) tooltip = `Click to narrow search to ${c.label} only`;
+            return (
+              <motion.button
+                key={c.key}
+                className={`${styles.categoryBox} ${isActive ? styles.active : ''}`}
+                onClick={handleClick}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                title={tooltip}
+              >
+                <span className={styles.categoryIcon}>{c.icon}</span>
+                <span className={styles.categoryLabel}>{c.label}</span>
+                <span className={styles.categoryCount}>
+                  {myListCounts[c.key] > 0
+                    ? `${myListCounts[c.key]} in your list • ${c.desc}`
+                    : c.desc}
+                </span>
+                <div className={styles.categoryGlow} />
+              </motion.button>
+            );
+          })}
         </div>
 
         <div className={styles.toolbar}>
@@ -274,11 +312,21 @@ function ReadPageInner() {
               Browse
             </button>
             <button
-              className={`${styles.viewBtn} ${viewMode === 'mylist' ? styles.viewActive : ''}`}
-              onClick={() => setViewMode('mylist')}
+              className={`${styles.viewBtn} ${viewMode === 'mylist' ? styles.viewActive : ''} ${userId ? '' : styles.viewBtnLocked}`}
+              onClick={() => {
+                if (!userId) {
+                  toast('Sign in to track your reading list', { icon: '🔒' });
+                  router.push('/login?next=/read');
+                  return;
+                }
+                setViewMode('mylist');
+              }}
+              aria-disabled={!userId}
+              title={userId ? undefined : 'Sign in to access your list'}
             >
+              {!userId && <HiLockClosed size={14} className={styles.viewLockIcon} />}
               My List
-              {trackerEntries.length > 0 && (
+              {userId && trackerEntries.length > 0 && (
                 <span className={styles.viewBadge}>{trackerEntries.length}</span>
               )}
             </button>
@@ -290,7 +338,7 @@ function ReadPageInner() {
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder={`Search ${category}...`}
+                placeholder="Search manga, manhwa, or manhua..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -327,6 +375,9 @@ function ReadPageInner() {
                 {debouncedQuery && (
                   <p className={styles.filterHint}>
                     Showing search results for &ldquo;{debouncedQuery}&rdquo;
+                    {searchTypeOverride
+                      ? ` · narrowed to ${searchTypeOverride}`
+                      : ' · click JP / KR / CN above to narrow by type'}
                   </p>
                 )}
               </div>
@@ -351,28 +402,74 @@ function ReadPageInner() {
             {/* Subtle top progress bar shown only during refetch with prior data on-screen */}
             {refetching && <div className={styles.refetchBar} aria-hidden="true" />}
 
-            {viewMode === 'browse' ? (
-              <BrowseList
-                items={mangaList}
-                loading={loading}
-                refetching={refetching}
-                loadingMore={loadingMore}
-                error={error}
-                hasMore={hasMore}
-                onRetry={() => fetchData(1, false)}
-                onLoadMore={loadMore}
-                trackerMap={trackerMap}
-                onSetStatus={handleQuickStatus}
-                onRemove={handleQuickRemove}
-              />
-            ) : (
-              <MyList items={myListItems} onRemove={handleQuickRemove} />
-            )}
+            {renderMainPanel({
+              viewMode,
+              userId,
+              browseProps: {
+                items: mangaList,
+                loading,
+                refetching,
+                loadingMore,
+                error,
+                hasMore,
+                onRetry: () => fetchData(1, false),
+                onLoadMore: loadMore,
+                trackerMap,
+                onSetStatus: handleQuickStatus,
+                onRemove: handleQuickRemove,
+              },
+              myListProps: { items: myListItems, onRemove: handleQuickRemove },
+              onSignIn: () => router.push('/login?next=/read'),
+              onBrowse: () => setViewMode('browse'),
+            })}
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function LockedMyList({ onSignIn, onBrowse }: Readonly<{ onSignIn: () => void; onBrowse: () => void }>) {
+  return (
+    <motion.div
+      className={styles.lockedPanel}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <div className={styles.lockedIcon} aria-hidden="true">
+        <HiLockClosed size={36} />
+      </div>
+      <h3 className={styles.lockedTitle}>Your reading list is locked</h3>
+      <p className={styles.lockedText}>
+        Sign in to track manga, manhwa &amp; manhua across devices, save your
+        progress and pick up where you left off.
+      </p>
+      <div className={styles.lockedActions}>
+        <button className={styles.lockedPrimary} onClick={onSignIn}>
+          Sign in
+        </button>
+        <button className={styles.lockedSecondary} onClick={onBrowse}>
+          Keep browsing
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
+type BrowseListProps = React.ComponentProps<typeof BrowseList>;
+type MyListProps = React.ComponentProps<typeof MyList>;
+
+function renderMainPanel(args: {
+  viewMode: ViewMode;
+  userId: string | null;
+  browseProps: BrowseListProps;
+  myListProps: MyListProps;
+  onSignIn: () => void;
+  onBrowse: () => void;
+}) {
+  if (args.viewMode === 'browse') return <BrowseList {...args.browseProps} />;
+  if (args.userId) return <MyList {...args.myListProps} />;
+  return <LockedMyList onSignIn={args.onSignIn} onBrowse={args.onBrowse} />;
 }
 
 function BrowseList({
@@ -523,52 +620,52 @@ function MyList({
         </div>
       ) : (
         <div className={styles.myListGrid}>
-      {items.map((entry) => (
-        <div key={entry.mal_id} className={styles.myListRow}>
-          <Link href={`/read/${entry.mal_id}`} className={styles.myListThumb}>
-            {entry.image_url && (
-              <Image
-                src={entry.image_url}
-                alt={entry.title}
-                fill
-                sizes="60px"
-                className={styles.poster}
-              />
-            )}
-          </Link>
-          <div className={styles.myListInfo}>
-            <Link href={`/read/${entry.mal_id}`} className={styles.myListTitle}>
-              {entry.title}
-            </Link>
-            <div className={styles.myListMeta}>
-              <span className={styles.statusPill} style={{ background: STATUS_COLORS[entry.status] }}>
-                {STATUS_LABELS[entry.status]}
-              </span>
-              {entry.total_chapters && (
-                <span className={styles.myListChapters}>
-                  {entry.chapters_read ?? 0} / {entry.total_chapters} ch
-                </span>
-              )}
+          {items.map((entry) => (
+            <div key={entry.mal_id} className={styles.myListRow}>
+              <Link href={`/read/${entry.mal_id}`} className={styles.myListThumb}>
+                {entry.image_url && (
+                  <Image
+                    src={entry.image_url}
+                    alt={entry.title}
+                    fill
+                    sizes="60px"
+                    className={styles.poster}
+                  />
+                )}
+              </Link>
+              <div className={styles.myListInfo}>
+                <Link href={`/read/${entry.mal_id}`} className={styles.myListTitle}>
+                  {entry.title}
+                </Link>
+                <div className={styles.myListMeta}>
+                  <span className={styles.statusPill} style={{ background: STATUS_COLORS[entry.status] }}>
+                    {STATUS_LABELS[entry.status]}
+                  </span>
+                  {entry.total_chapters && (
+                    <span className={styles.myListChapters}>
+                      {entry.chapters_read ?? 0} / {entry.total_chapters} ch
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className={styles.myListActions}>
+                <Link
+                  href={`/read/${entry.mal_id}`}
+                  className={styles.iconBtn}
+                  title="Open details"
+                >
+                  <HiBookOpen size={14} />
+                </Link>
+                <button
+                  className={styles.iconBtn}
+                  onClick={() => onRemove(entry.mal_id)}
+                  title="Remove from list"
+                >
+                  <HiTrash size={14} />
+                </button>
+              </div>
             </div>
-          </div>
-          <div className={styles.myListActions}>
-            <Link
-              href={`/read/${entry.mal_id}`}
-              className={styles.iconBtn}
-              title="Open details"
-            >
-              <HiBookOpen size={14} />
-            </Link>
-            <button
-              className={styles.iconBtn}
-              onClick={() => onRemove(entry.mal_id)}
-              title="Remove from list"
-            >
-              <HiTrash size={14} />
-            </button>
-          </div>
-        </div>
-      ))}
+          ))}
         </div>
       )}
     </>

@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { HiFilm, HiTv, HiSparkles, HiEye, HiClock, HiHeart, HiArrowRight, HiFire } from 'react-icons/hi2';
+import { HiFilm, HiTv, HiSparkles, HiEye, HiClock, HiHeart, HiArrowRight, HiFire, HiTrophy, HiBookOpen, HiGlobeAlt, HiUserGroup } from 'react-icons/hi2';
 import { GiPunchBlast, GiDramaMasks, GiRocket, GiGhost, GiMagnifyingGlass, GiRose, GiTheaterCurtains } from 'react-icons/gi';
+import { useAuth } from '@/context/AuthContext';
 import HeroBanner from '@/components/home/HeroBanner';
 import MediaRow from '@/components/home/MediaRow';
 import Loader from '@/components/common/Loader';
@@ -32,10 +33,21 @@ function animeToMediaItem(anime: AnimeItem): MediaItem {
   };
 }
 
-const QUICK_NAV = [
+// Shown to authenticated users — personal/quick-access items
+const QUICK_NAV_AUTH = [
   { href: '/watched', label: 'Watched', icon: HiEye, color: '#10b981' },
   { href: '/activity', label: 'History', icon: HiClock, color: '#6366f1' },
   { href: '/recommendations', label: 'Friends Rec', icon: HiHeart, color: '#ec4899' },
+];
+
+// Shown to logged-out visitors — public nav destinations they might miss
+// because the hamburger/menu isn't immediately visible on small screens.
+const QUICK_NAV_PUBLIC = [
+  { href: '/mood', label: 'Mood', icon: HiSparkles, color: '#a855f7' },
+  { href: '/rankings', label: 'Rankings', icon: HiTrophy, color: '#f59e0b' },
+  { href: '/read', label: 'Read', icon: HiBookOpen, color: '#10b981' },
+  { href: '/global', label: 'Global', icon: HiGlobeAlt, color: '#06b6d4' },
+  { href: '/watch-parties', label: 'Watch Parties', icon: HiUserGroup, color: '#ec4899' },
 ];
 
 // Module-level cache — survives component unmount/remount during client-side navigation
@@ -84,6 +96,12 @@ export default function HomePage() {
   const [tabLoading, setTabLoading] = useState(false);
   const [loadedTabs, setLoadedTabs] = useState<Set<string>>(() => new Set(_homeCache?.loadedTabs ?? []));
   const { isDark } = useTheme();
+  const { isAuthenticated } = useAuth();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  // Until hydrated, render the public set so SSR markup matches the
+  // unauthenticated initial render and avoids hydration mismatch.
+  const quickNavItems = mounted && isAuthenticated ? QUICK_NAV_AUTH : QUICK_NAV_PUBLIC;
 
   useEffect(() => {
     if (_homeCache) return; // Already have data from previous visit
@@ -198,6 +216,26 @@ export default function HomePage() {
       <HeroBanner items={trending.slice(0, 5)} />
 
       <div className={styles.container}>
+        {/* "What we offer" CTA — mobile/tablet only, signed-out only.
+            Single tappable card that takes new visitors to /help where
+            every feature is documented. Hidden on desktop (full nav is
+            already visible) and once the user signs in. */}
+        {mounted && !isAuthenticated && (
+          <Link href="/help" className={styles.offerCard} aria-label="Discover everything Viewtopia offers">
+            <div className={styles.offerIcon} aria-hidden="true">
+              <HiSparkles size={24} />
+            </div>
+            <div className={styles.offerBody}>
+              <span className={styles.offerBadge}>NEW HERE?</span>
+              <h2 className={styles.offerTitle}>Discover everything Viewtopia offers</h2>
+              <p className={styles.offerSubtitle}>
+                Movies, TV, anime, manga, mood picks, watch parties &amp; more — tap to explore.
+              </p>
+            </div>
+            <HiArrowRight size={20} className={styles.offerArrow} />
+          </Link>
+        )}
+
         {/* Quick Nav Section */}
         <section className={styles.quickNav}>
           <motion.h2
@@ -208,7 +246,7 @@ export default function HomePage() {
             Explore Viewtopia
           </motion.h2>
           <div className={styles.navGrid}>
-            {QUICK_NAV.map((item, i) => (
+            {quickNavItems.map((item, i) => (
               <motion.div
                 key={item.href}
                 initial={{ opacity: 0, y: 20 }}

@@ -383,5 +383,42 @@
 }
 
 @media (max-width: 640px) {
-  .container { padding: 0 1rem; }
+  .container {
+    padding: 0 0.6rem;
+    gap: 0.4rem;
+    height: 58px;
+  }
+
+  /* Shrink the Viewtopia logo to free horizontal space */
+  .logo {
+    transform: scale(0.78);
+    transform-origin: left center;
+    margin-right: -0.5rem;
+  }
+
+  .actions { gap: 0.25rem; }
+
+  /* Hide the "Profile" text next to the avatar; the avatar itself remains */
+  .profileLink { display: none; }
+
+  .iconBtn,
+  .menuToggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+
+  .mobileMenu { top: 58px; }
+}
+
+@media (max-width: 380px) {
+  .container { padding: 0 0.45rem; gap: 0.3rem; }
+  .logo { transform: scale(0.7); margin-right: -0.75rem; }
+  .iconBtn, .menuToggle { width: 30px; height: 30px; }
+  .avatar { width: 28px; height: 28px; font-size: 0.72rem; }
 }

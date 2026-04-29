@@ -240,10 +240,13 @@ export default function MovieDetailPage({ params }: { params: Promise<{ id: stri
                 {isWatched ? <HiCheckCircle size={18} /> : <HiPlay size={18} />}
                 {isWatched ? 'Watched' : 'Mark as Watched'}
               </button>
-              <button className={styles.recommendBtn} onClick={() => setShowRecommend(true)}>
-                <HiHeart size={18} />
-                Recommend
-              </button>
+              {/* Recommend is a social action — only meaningful for signed-in users. */}
+              {user && (
+                <button className={styles.recommendBtn} onClick={() => setShowRecommend(true)}>
+                  <HiHeart size={18} />
+                  Recommend
+                </button>
+              )}
               <Link
                 href={`/watch-parties?movie=${movie.id}&title=${encodeURIComponent(movie.title)}&poster=${encodeURIComponent(movie.poster_path || '')}`}
                 className={styles.partyBtn}
@@ -253,14 +256,16 @@ export default function MovieDetailPage({ params }: { params: Promise<{ id: stri
               </Link>
             </div>
 
-            <RecommendModal
-              isOpen={showRecommend}
-              onClose={() => setShowRecommend(false)}
-              mediaTitle={movie.title}
-              mediaId={movie.id}
-              mediaType="movie"
-              posterPath={movie.poster_path}
-            />
+            {user && (
+              <RecommendModal
+                isOpen={showRecommend}
+                onClose={() => setShowRecommend(false)}
+                mediaTitle={movie.title}
+                mediaId={movie.id}
+                mediaType="movie"
+                posterPath={movie.poster_path}
+              />
+            )}
 
             <WatchedDateModal
               open={askWatchedDate}

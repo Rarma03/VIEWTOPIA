@@ -275,20 +275,25 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
                 {isWatched ? <HiCheckCircle size={18} /> : <HiPlay size={18} />}
                 {isWatched ? 'Watched' : 'Mark as Watched'}
               </button>
-              <button className={styles.recommendBtn} onClick={() => setShowRecommend(true)}>
-                <HiHeart size={18} />
-                Recommend
-              </button>
+              {/* Recommend is a social action — only meaningful for signed-in users. */}
+              {user && (
+                <button className={styles.recommendBtn} onClick={() => setShowRecommend(true)}>
+                  <HiHeart size={18} />
+                  Recommend
+                </button>
+              )}
             </div>
 
-            <RecommendModal
-              isOpen={showRecommend}
-              onClose={() => setShowRecommend(false)}
-              mediaTitle={anime.title_english || anime.title}
-              mediaId={anime.mal_id}
-              mediaType="anime"
-              posterPath={anime.images?.jpg?.image_url || null}
-            />
+            {user && (
+              <RecommendModal
+                isOpen={showRecommend}
+                onClose={() => setShowRecommend(false)}
+                mediaTitle={anime.title_english || anime.title}
+                mediaId={anime.mal_id}
+                mediaType="anime"
+                posterPath={anime.images?.jpg?.image_url || null}
+              />
+            )}
 
             <WatchedDateModal
               open={askWatchedDate}

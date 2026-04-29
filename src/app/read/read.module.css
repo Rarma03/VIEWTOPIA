@@ -478,6 +478,96 @@
   color: #f97316;
 }
 
+/* Locked My List button (logged-out state) */
+.viewBtnLocked {
+  color: rgba(232, 237, 245, 0.4);
+  cursor: pointer;
+}
+.viewBtnLocked:hover {
+  color: rgba(232, 237, 245, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+}
+.viewLockIcon {
+  opacity: 0.7;
+}
+
+/* Locked My List panel */
+.lockedPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.9rem;
+  padding: 3rem 1.5rem;
+  border-radius: 16px;
+  border: 1px dashed rgba(168, 85, 247, 0.25);
+  background:
+    radial-gradient(circle at top, rgba(168, 85, 247, 0.08), transparent 60%),
+    rgba(255, 255, 255, 0.02);
+}
+.lockedIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), rgba(168, 85, 247, 0.22));
+  color: #f59e0b;
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.25);
+}
+.lockedTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e8edf5;
+  margin: 0;
+}
+.lockedText {
+  max-width: 420px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(232, 237, 245, 0.6);
+  margin: 0;
+}
+.lockedActions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+.lockedPrimary {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f97316, #ff3d71);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.lockedPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(249, 115, 22, 0.5);
+}
+.lockedSecondary {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(232, 237, 245, 0.75);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.lockedSecondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8edf5;
+}
+
 .searchClear {
   position: absolute;
   right: 8px;
