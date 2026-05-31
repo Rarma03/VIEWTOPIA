@@ -272,7 +272,7 @@ export default function EpisodeRatingGrid(props: Props) {
 
       {loading ? (
         <p className={styles.loading}>Loading episode ratings…</p>
-      ) : !hasAny || maxEpisode === 0 ? (
+      ) : maxEpisode === 0 ? (
         <p className={styles.empty}>No per-episode ratings available.</p>
       ) : (
         <>
@@ -400,7 +400,7 @@ function RowFragment({
               aria-label={interactive ? `Mark progress to season ${s} episode ${epNum}` : undefined}
               title={tooltipText}
             >
-              –
+              NA
             </button>
           );
         }

@@ -262,3 +262,41 @@
   background: rgba(229, 9, 20, 0.12);
   color: #ff8a91;
 }
+
+/* Status dropdown beside the Mark as Watched button */
+.statusMenuWrap { position: relative; display: inline-flex; align-items: center; }
+.statusMenuToggle {
+  margin-left: 6px;
+  padding: 0 8px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(168,85,247,0.12);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.statusMenuToggle:hover { border-color: rgba(168,85,247,0.2); }
+.statusMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  border-radius: 10px;
+  padding: 6px 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  z-index: 60;
+}
+.dark .statusMenu { background: rgba(12,14,18,0.95); border: 1px solid rgba(168,85,247,0.08); }
+.light .statusMenu { background: #fff; border: 1px solid rgba(0,0,0,0.08); }
+.statusMenuItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.statusMenuItem:hover { background: rgba(168,85,247,0.06); }

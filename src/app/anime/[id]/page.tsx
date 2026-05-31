@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState, useEffect } from 'react';
+import { use, useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -117,6 +117,55 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
     });
     if (updated) setWatchlistEntry(updated);
     toast.success('Progress reset');
+  };
+
+  // Status dropdown state + helpers
+  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
+  const statusMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      const el = statusMenuRef.current;
+      if (el && !el.contains(e.target as Node)) setStatusMenuOpen(false);
+    }
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+
+  const handleMarkButtonClick = async () => {
+    if (!user) { toast.error('Please log in first'); router.push('/login'); return; }
+    if (isWatched && watchlistEntry) {
+      const updated = await updateWatchlistItem(watchlistEntry.id, { status: 'watchlist', watched_date: null });
+      if (updated) setWatchlistEntry(updated);
+      toast.success('Unmarked as watched');
+      return;
+    }
+    setAskWatchedDate(true);
+  };
+
+  const handleChangeStatus = async (status: 'watching' | 'dropped' | 'watchlist') => {
+    if (!user) { toast.error('Please log in first'); router.push('/login'); return; }
+    setStatusMenuOpen(false);
+    let entry: WatchlistItem | null = watchlistEntry;
+    if (!entry) {
+      const newEntry = await addToWatchlist({
+        user_id: user.id,
+        media_id: anime.mal_id,
+        media_type: 'anime',
+        title: anime.title_english || anime.title,
+        poster_path: anime.images?.jpg?.image_url || null,
+        status,
+        watched_date: null,
+        notes: null,
+        original_language: 'ja',
+      });
+      if (newEntry) setWatchlistEntry(newEntry);
+      toast.success(`Marked as ${status}`);
+      return;
+    }
+    const updated = await updateWatchlistItem(entry.id, { status, watched_date: null });
+    if (updated) setWatchlistEntry(updated);
+    toast.success(`Marked as ${status}`);
   };
 
   return (
@@ -262,19 +311,36 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
                 {isInList ? <HiCheckCircle size={18} /> : <HiBookmark size={18} />}
                 {isInList ? 'Added' : 'Add to Watchlist'}
               </button>
-              <button className={`${styles.secondaryBtn} ${isWatched ? styles.watchedActiveBtn : ''}`} onClick={async () => {
-                if (!user) { toast.error('Please log in first'); router.push('/login'); return; }
-                if (isWatched && watchlistEntry) {
-                  const updated = await updateWatchlistItem(watchlistEntry.id, { status: 'watchlist', watched_date: null });
-                  if (updated) setWatchlistEntry(updated);
-                  toast.success('Unmarked as watched');
-                  return;
-                }
-                setAskWatchedDate(true);
-              }}>
-                {isWatched ? <HiCheckCircle size={18} /> : <HiPlay size={18} />}
-                {isWatched ? 'Watched' : 'Mark as Watched'}
-              </button>
+              <div className={styles.statusMenuWrap} ref={statusMenuRef}>
+                <button className={`${styles.secondaryBtn} ${isWatched ? styles.watchedActiveBtn : ''}`} onClick={handleMarkButtonClick}>
+                  {isWatched ? <HiCheckCircle size={18} /> : <HiPlay size={18} />}
+                  {isWatched ? 'Watched' : 'Mark as Watched'}
+                </button>
+                <button
+                  type="button"
+                  className={styles.statusMenuToggle}
+                  onClick={(e) => { e.stopPropagation(); setStatusMenuOpen((s) => !s); }}
+                  aria-label="Change status"
+                >
+                  ▾
+                </button>
+                {statusMenuOpen && (
+                  <div className={styles.statusMenu} role="menu">
+                    <button type="button" className={styles.statusMenuItem} onClick={() => { setStatusMenuOpen(false); handleMarkButtonClick(); }}>
+                      {isWatched ? 'Unmark as watched' : 'Mark as watched'}
+                    </button>
+                    <button type="button" className={styles.statusMenuItem} onClick={() => handleChangeStatus('watching')}>
+                      Mark as watching
+                    </button>
+                    <button type="button" className={styles.statusMenuItem} onClick={() => handleChangeStatus('dropped')}>
+                      Mark as dropped
+                    </button>
+                    <button type="button" className={styles.statusMenuItem} onClick={() => handleChangeStatus('watchlist')}>
+                      Add to watchlist
+                    </button>
+                  </div>
+                )}
+              </div>
               {/* Recommend is a social action — only meaningful for signed-in users. */}
               {user && (
                 <button className={styles.recommendBtn} onClick={() => setShowRecommend(true)}>
