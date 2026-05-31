@@ -34,7 +34,18 @@ export default function TVDetailPage({ params }: { params: Promise<{ id: string 
   const [watchlistEntry, setWatchlistEntry] = useState<WatchlistItem | null>(null);
   const [showRatings, setShowRatings] = useState<UserRating[]>([]);
   const isWatched = watchlistEntry?.status === 'watched';
+  // Status dropdown state + helpers (moved above conditional returns so hooks order is stable)
+  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
+  const statusMenuRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      const el = statusMenuRef.current;
+      if (el && !el.contains(e.target as Node)) setStatusMenuOpen(false);
+    }
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
@@ -169,18 +180,6 @@ export default function TVDetailPage({ params }: { params: Promise<{ id: string 
     toast.success('Progress reset');
   };
 
-  // Status dropdown state + helpers
-  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
-  const statusMenuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function onDoc(e: MouseEvent) {
-      const el = statusMenuRef.current;
-      if (el && !el.contains(e.target as Node)) setStatusMenuOpen(false);
-    }
-    document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
-  }, []);
 
   const handleMarkButtonClick = async () => {
     if (!requireAuth() || !user) return;

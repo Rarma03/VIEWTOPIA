@@ -34,6 +34,19 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
   const isWatched = watchlistEntry?.status === 'watched';
   const isInList = !!watchlistEntry;
 
+  // Status dropdown state + helpers (moved here so hooks run in stable order)
+  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
+  const statusMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      const el = statusMenuRef.current;
+      if (el && !el.contains(e.target as Node)) setStatusMenuOpen(false);
+    }
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
@@ -119,18 +132,7 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
     toast.success('Progress reset');
   };
 
-  // Status dropdown state + helpers
-  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
-  const statusMenuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function onDoc(e: MouseEvent) {
-      const el = statusMenuRef.current;
-      if (el && !el.contains(e.target as Node)) setStatusMenuOpen(false);
-    }
-    document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
-  }, []);
+  
 
   const handleMarkButtonClick = async () => {
     if (!user) { toast.error('Please log in first'); router.push('/login'); return; }
