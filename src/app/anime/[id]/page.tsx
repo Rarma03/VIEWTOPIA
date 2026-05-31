@@ -132,7 +132,7 @@ export default function AnimeDetailPage({ params }: { params: Promise<{ id: stri
     toast.success('Progress reset');
   };
 
-  
+
 
   const handleMarkButtonClick = async () => {
     if (!user) { toast.error('Please log in first'); router.push('/login'); return; }
